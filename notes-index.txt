@@ -1,0 +1,316 @@
+<html>
+<head>
+<title>title + plus button</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+<style type=text/css>
+
+body
+{
+background-color:black;
+overflow-x: hidden;
+}
+
+::-webkit-scrollbar{width:15px;}
+::-webkit-scrollbar-track
+{
+background:black;
+border-radius:5px;
+}
+
+::-webkit-scrollbar-thumb
+{
+background:red;
+border-radius:5px;
+}
+
+.head
+{
+position:fixed;
+top:5px;
+z-index:5;
+width:1340px;
+background: linear-gradient(to right, red 20%, yellow 50%);
+border-radius: 10px;
+font-size:55px; 
+font-family:Brush Script MT;
+text-align:center; 
+}
+
+.plus-main
+{
+position: fixed;
+left: 1305px;
+top: 590px;
+width: 50px;
+background-color: black;
+border: none;
+cursor:pointer;
+}
+
+.title
+{
+background: linear-gradient(to right, red 20%, gold 50%);
+width: 342px;
+height:60px;
+font-size: 40px;
+border-radius:10px 10px 0 0;
+font-weight:bold;
+text-align:center;
+}
+
+.bottomlist
+{
+background-color:silver;
+border-radius:0 0 10px 10px;
+width:342;
+height:300px;
+font-size:23px;
+}
+
+.list-memb
+{
+background:silver;
+width:500px;
+color:black;
+border:none;
+font-size:26px;
+cursor:pointer;
+}
+
+.edit , .delete
+{
+background-color:silver;
+border:none;
+cursor:pointer;
+}
+
+.extra
+{
+text-align:center;
+}
+
+#list1, #list2, #list3, #list4, #list5, #list6, #list7, #list8, #list9, #list10, #list11, #list12, #list13, #list14, #list15
+{
+position:absolute;
+width:342px;
+}
+
+#list1:hover, #list2:hover, #list3:hover, #list4:hover, #list5:hover, #list6:hover, #list7:hover, #list8:hover,
+ #list9:hover, #list10:hover, #list11:hover, #list12:hover, #list13:hover, #list14:hover, #list15:hover{transform:scale(1.07);}
+
+#list1, #list2, #list3     {top:150px;}
+#list4, #list5, #list6     {top:575px;}
+#list7, #list8, #list9     {top:1000px;}
+#list10, #list11, #list12     {top:1425px;}
+#list13, #list14, #list15     {top:1850px;}
+
+#list2, #list5, #list8, #list11, #list14 {left:500px;}
+#list3, #list6, #list9, #list12, #list15 {left:950px;}
+#list1, #list4, #list7, #list10, #list13 {left:50px;}
+
+</style>
+</head>
+
+<!------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------->
+
+<body>
+<div class="head" id=head>Notes App</div>
+<!------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------->
+<div id="list1">
+	<div class="title" id="1" onclick="taskname(1)">Task List</div>
+   <div>
+	<div class="bottomlist">
+<!------------------------------------------------------------------------------------------->
+		<div id="task1-1">
+		<font class="list-memb" id="input1-1" onclick="strikeout(1,1)">Task 1 &nbsp &nbsp &nbsp &nbsp </font> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+			<button class="edit"  onclick="editbtnclick(1,1)" id="edit1-1"><i class="fa fa-edit" style="color:gold ; font-size:20px"></i></button>
+			<button class="delete" onclick="delbtnclick(1,1)" id="dele1-1"><i class="fa fa-trash" style="color:red ; font-size:20px"></i></button>
+		</div>
+<!------------------------------------------------------------------------------------------->
+		<div id=task1-2>
+		<font class="list-memb" id="input1-2" onclick="strikeout(1,2)">Task 2 &nbsp &nbsp &nbsp &nbsp </font> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+     		        <button class="edit"  onclick="editbtnclick(1,2)" id="edit1-2"><i class="fa fa-edit" style="color:gold ; font-size:20px"></i></button>
+			<button class="delete" onclick="delbtnclick(1,2)" id="dele1-2"><i class="fa fa-trash" style="color:red ; font-size:20px"></i></button>
+		</div>
+<!------------------------------------------------------------------------------------------->
+		<div id=task1-3></div>
+		<div id=task1-4></div>
+		<div id=task1-5></div>
+		<div id=task1-6></div>
+		<div id=task1-7></div>
+<!------------------------------------------------------------------------------------------->
+
+		</br>
+		<div class=extra id=extra1> 
+			<button id=add1 onclick="newtask(1)">Add Task</button>
+			<button id=del1 onclick="deletelist(1)">Delete list</button>
+		</div>
+
+	</div>
+   </div> 
+</div>
+<!------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------->
+
+<div id="list2"></div>
+<div id="list3"></div>
+<div id="list4"></div>
+<div id="list5"></div>
+<div id="list6"></div>
+<div id="list7"></div>
+<div id="list8"></div>
+<div id="list9"></div>
+<div id="list10"></div>
+<div id="list11"></div>
+<div id="list12"></div>
+<div id="list13"></div>
+<div id="list14"></div>
+<div id="list15"></div>
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+<button class="plus-main" id="plus-main"><i class="fa fa-plus" style="Font-size:40px;color:gold"></i></button>
+
+
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+
+<script type="text/javascript">
+
+
+/*==========================================================change task-title name==================================================*/
+function taskname(k)
+{
+let task_name=prompt("Enter the title of your list :","");
+		if(task_name)
+		{
+		document.getElementById(`${k}`).innerHTML=task_name;
+		}
+}
+/*================================================================================================================================*/
+
+/*===============================================on clicking edit button, change task name========================================*/
+
+function editbtnclick(i,j)
+{
+let task=prompt("Enter the task:","");
+		if(task)
+		{
+		document.getElementById(`input${i}-${j}`).innerHTML=task+ "&nbsp &nbsp &nbsp &nbsp ";
+		}
+}
+/*================================================================================================================================*/
+
+/*==============================================add a new task list==================================================*/
+
+var i=2;
+function newtasklist()
+{
+const newlist=`<div class="title" id=${i} onclick="taskname(${i})">Task List</div>
+<div>
+	<div class="bottomlist">
+<!------------------------------------------------------------------------------------------->
+		<div id="task${i}-1">
+		<font class="list-memb" id="input${i}-1" onclick="strikeout(${i},1)">Task 1 &nbsp &nbsp &nbsp &nbsp </font> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+			<button class="edit"  onclick="editbtnclick(${i},1)" id="edit${i}-1"><i class="fa fa-edit" style="color:gold ; font-size:20px"></i></button>
+			<button class="delete" onclick="delbtnclick(${i},1)" id="dele${i}-1"><i class="fa fa-trash" style="color:red ; font-size:20px"></i></button>
+		</div>
+<!------------------------------------------------------------------------------------------->
+		<div id=task${i}-2>
+		<font class="list-memb" id="input${i}-2" onclick="strikeout(${i},2)">Task 2 &nbsp &nbsp &nbsp &nbsp </font> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp	   
+     		        <button class="edit"  onclick="editbtnclick(${i},2)" id="edit${i}-2"><i class="fa fa-edit" style="color:gold ; font-size:20px"></i></button>
+			<button class="delete" onclick="delbtnclick(${i},2)" id="dele${i}-2"><i class="fa fa-trash" style="color:red ; font-size:20px"></i></button>
+		</div>
+<!------------------------------------------------------------------------------------------->
+		<div id=task${i}-3></div>
+		<div id=task${i}-4></div>
+		<div id=task${i}-5></div>
+		<div id=task${i}-6></div>
+		<div id=task${i}-7></div>
+<!------------------------------------------------------------------------------------------->
+		</br>
+		<div class=extra id=extra${i}> 
+			<button id="add${i}" onclick="newtask(${i})">Add Task</button>
+			<button id="del${i}" onclick="deletelist(${i})">Delete list</button>
+		</div>
+
+	</div>
+</div>`
+
+let task_name=prompt("Enter the title of your list :","");
+		if(task_name)
+		{
+		document.getElementById(`list${i}`).innerHTML=newlist;
+		document.getElementById(`${i}`).innerHTML=task_name;
+		}
+
+i=i+1;
+document.getElementById("plus-main").onclick=function(){newtasklist()};
+}
+document.getElementById("plus-main").onclick=function(){newtasklist()};
+
+
+
+/*=====================================================finish adding new list========================================================*/
+
+/*==============================================add list button for adding new task=====================================*/
+
+var j=[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
+function newtask(d)
+{
+const new_task=`<font class="list-memb" id="input${d}-${j[d]}" onclick="strikeout(${d},${j[d]})">&nbsp &nbsp &nbsp &nbsp</font> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+			<button class="edit"  onclick="editbtnclick(${d},${j[d]})" id="edit${d}-${j[d]}"><i class="fa fa-edit" style="color:gold ; font-size:20px"></i></button>
+			<button class="delete" onclick="delbtnclick(${d},${j[d]})" id="dele${d}-${j[d]}"><i class="fa fa-trash" style="color:red ; font-size:20px"></i></button>`
+
+let task=prompt("Enter the task:","");
+		if(task)
+		{
+		document.getElementById(`task${d}-${j[d]}`).innerHTML=new_task;
+		document.getElementById(`input${d}-${j[d]}`).innerHTML=task+ "&nbsp &nbsp &nbsp &nbsp ";
+		}
+j[d]=j[d]+1;
+}
+
+/*========================================================finish adding new task========================================================*/
+
+/*=====================================================strikeout task=====================================================*/
+
+function strikeout(a,b)
+{
+document.getElementById(`input${a}-${b}`).style.textDecoration="line-through";
+document.getElementById(`input${a}-${b}`).style.color="grey";
+document.getElementById(`task${a}-${b}`).getElementsByTagName("button")[0].innerHTML="";
+}
+
+/*=====================================================finish strikeout task=====================================================*/
+
+/*=====================================================delete task=====================================================*/
+
+function delbtnclick(i,j)
+{
+document.getElementById(`task${i}-${j}`).innerHTML="";
+}
+
+/*=====================================================finish delete task=====================================================*/
+
+/*=====================================================delete task list and rearranging=====================================================*/
+function deletelist(y)
+{
+document.getElementById(`list${y}`).innerHTML="";
+}
+
+/*=====================================================finish deleting task list=====================================================*/
+
+</script>
+<!----------------------------------------------------------------------------------------------------------------------->
+						</body>
+						</html>
