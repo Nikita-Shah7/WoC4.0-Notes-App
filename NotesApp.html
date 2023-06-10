@@ -1,0 +1,246 @@
+<!--mainHead,  plusMain,  change name of task list, change name of task, edit button, delete button, add task to limit 6,
+                     transform scale, strikeout, adding new task list(lochha.com when new task is added)---->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTES</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!------------------------------------------------------------------------------------------------------------------->
+    <style type="text/css">
+        body {
+            background-color: black;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0.8vw;
+            cursor: all-scroll;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: red;
+            border-radius: 0.33vw;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: black;
+            border-radius: 0.35vw;
+        }
+
+        .mainHead {
+            margin: 0vw;
+            z-index: 5;
+            width: 100%;
+            background: linear-gradient(to right, red 20%, yellow 50%);
+            border-radius: 1vw;
+            color: black;
+            font-size: 5vw;
+            font-family: Brush Script MT;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .plus-main {
+            position: fixed;
+            background-color: black;
+            color: gold;
+            left: 95%;
+            top: 90%;
+            width: 5vw;
+            cursor: pointer;
+            border: none;
+            font-size: 4vw;
+        }
+
+        div.taskList {
+            width: 25vw;
+            display: inline-block;
+            margin: 3vw 3.5vw 3vw 3.5vw;
+        }
+
+        .taskList:hover {
+            transform: scale(1.05, 1.05);
+        }
+
+        .taskListHead {
+            margin-bottom: 0vw;
+            background: linear-gradient(to right, red 20%, yellow 50%);
+            font-size: 3vw;
+            text-align: center;
+            width: 25vw;
+            height: 4.5vw;
+            line-height: 4.2vw;
+            border-radius: 1vw 1vw 0 0;
+        }
+
+        .bottomList {
+            margin-top: 0vw;
+            background-color: silver;
+            font-size: 2.2vw;
+            height: 20vw;
+            width: 25vw;
+            border-radius: 0 0 1vw 1vw;
+            border: none;
+        }
+
+        .edit {
+            background-color: silver;
+            color: yellow;
+            border: none;
+            font-size: 2.1vw;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .delete {
+            background-color: silver;
+            color: red;
+            border: none;
+            font-size: 2.1vw;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .extra {
+            text-align: center;
+            font-size: 2vw;
+        }
+    </style>
+    <!------------------------------------------------------------------------------------------------------------------------------>
+</head>
+
+<body>
+    <h1 class="mainHead">Notes App</h1>
+
+    <div id="taskList1" class="taskList">
+        <h3 class="taskListHead" id="taskListHead1" onclick="editTaskListHeadName(1)">Task Name</h3>
+        <div class="bottomList">
+            <div id="task1-1">
+                <font id="taskName1-1" onclick="strikeout(1,1)">Task</font>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="edit" id="edit1-1" onclick="editTaskName(1,1)"><i class="fa fa-edit"></i></button>
+                <button class="delete" id="delete1-1" onclick="deleteTask(1,1)"><i class="fa fa-trash"></i></button>
+            </div>
+
+            <div id="task1-2">
+                <font id="taskName1-2" onclick="strikeout(1,2)">Task</font>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="edit" id="edit1-2" onclick="editTaskName(1,2)"><i class="fa fa-edit"></i></button>
+                <button class="delete" id="delete1-2" onclick="deleteTask(1,2)"><i class="fa fa-trash"></i></button>
+            </div>
+
+            <div class="extra" id="extra1">
+                <br>
+                <button onclick="addNewTask(1)">Add task</button>
+                <button onclick="deleteCurrTaskList(1)">Delete List</button>
+            </div>
+        </div>
+    </div>
+    <span id="end-of-app"></span>
+
+    <button class="plus-main" id="plus-main" onclick="addNewTaskList()"><i class="fa fa-plus"></i></button>
+
+
+    <script type="text/javascript">
+
+        var task_lists = 1;
+        var tasks = [2, 2, 2, 2, 2];
+        var strike = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]];
+        var task_count = [2, 2, 2, 2, 2, 2];
+
+        function editTaskListHeadName(k) {
+            let task_head_name = prompt("Enter the title for Task List  : ", "Task Title");
+            if (task_head_name) document.getElementById(`taskListHead${k}`).innerText = task_head_name;
+        }
+
+        function editTaskName(m, n) {
+            let task_name = prompt("Enter task Name : ", "");
+            if (task_name) {
+                let x = document.getElementById(`taskName${m}-${n}`).innerHTML = task_name;
+            }
+        }
+
+        function strikeout(m, n) {
+            if (strike[m][n] == 0) {
+                document.getElementById(`taskName${m}-${n}`).style.textDecoration = "line-through";
+                document.getElementById(`taskName${m}-${n}`).style.color = "grey";
+                document.getElementById(`edit${m}-${n}`).style.visibility = "hidden";
+                strike[m][n] = 1;
+            }
+            else {
+                document.getElementById(`taskName${m}-${n}`).style.textDecoration = "none";
+                document.getElementById(`taskName${m}-${n}`).style.color = "black";
+                document.getElementById(`edit${m}-${n}`).style.visibility = "visible";
+                strike[m][n] = 0;
+            }
+        }
+
+        function addNewTaskList() {
+            task_lists++;
+
+            let new_task_list = `<div id="taskList${task_lists}" class="taskList">
+        <h3 class="taskListHead" id="taskListHead${task_lists}" onclick="editTaskListHeadName(${task_lists})">Task Name</h3>
+        <div class="bottomList">
+            <div id="task${task_lists}-1">
+                <font id="taskName${task_lists}-1" onclick="strikeout(${task_lists},1)">Task</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="edit" id="edit${task_lists}-1" onclick="editTaskName(${task_lists},1)"><i class="fa fa-edit"></i></button>
+                <button class="delete" id="delete${task_lists}-1" onclick="deleteTask(${task_lists},1)"><i class="fa fa-trash"></i></button>
+            </div>
+            
+            <div id="task${task_lists}-2">
+                <font id="taskName${task_lists}-2" onclick="strikeout(${task_lists},2)">Task</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="edit" id="edit${task_lists}-2" onclick="editTaskName(${task_lists},2)"><i class="fa fa-edit"></i></button>
+                <button class="delete" id="delete${task_lists}-2" onclick="deleteTask(${task_lists},2)"><i class="fa fa-trash"></i></button>
+            </div>
+
+            <div class="extra" id="extra${task_lists}">
+                <br>
+            <button onclick="addNewTask(${task_lists})">Add task</button>
+            <button onclick="deleteCurrTaskList(${task_lists})">Delete List</button>
+            </div>
+        </div>
+    </div>`;
+
+            document.getElementById("end-of-app").insertAdjacentHTML("beforeend", new_task_list);
+            //document.getElementById(`taskList${task_lists}`).style.position="absolute";
+            //fixed---list is inserted one over another;
+            //relative--no fhe-far;
+            //absolute==fixed;
+            //sticky==fixed
+        }
+
+        function addNewTask(m) {
+            tasks[m]++;
+            if (task_count[m] > 5) {
+                alert("No more tasks can be inserted in this Task List.");
+            }
+            else {
+                task_count[m]++;
+                let new_task = `<div id="task${m}-${tasks[m]}">
+                <font id="taskName${m}-${tasks[m]}" onclick="strikeout(${m},${tasks[m]})">Task</font>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button class="edit" id="edit${m}-${tasks[m]}" onclick="editTaskName(${m},${tasks[m]})"><i class="fa fa-edit"></i></button>
+                <button class="delete" id="delete${m}-${tasks[m]}" onclick="deleteTask(${m},${tasks[m]})"><i class="fa fa-trash"></i></button>
+            </div>`;
+
+                document.getElementById(`extra${m}`).insertAdjacentHTML("beforebegin", new_task);
+            }
+        }
+
+        function deleteTask(m, n) {
+            task_count[m] = task_count[m] - 1;
+            document.getElementById(`task${m}-${n}`).remove();
+        }
+
+        function deleteCurrTaskList(m) {
+            document.getElementById(`taskList${m}`).remove();
+            task_lists--;
+        }
+
+    </script>
+</body>
+
+</html>
